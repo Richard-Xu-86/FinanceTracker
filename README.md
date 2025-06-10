@@ -104,3 +104,4 @@ Make sure this .env file is located at the root of the project (FinanceTracker/)
 
 ## For any query feel free to contact 
 richardxubusiness@gmail.com
+

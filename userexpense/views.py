@@ -184,7 +184,7 @@ def Expenses_Stats(request):
 @login_required
 def export_csv(request):
     response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=Expenses'+str(datetime.datetime.now())+'.csv'
+    response['Content-Disposition'] = 'attachment; filename=Expenses'+str(datetime.now())+'.csv'
     writer = csv.writer(response)
     writer.writerow(['Amount','Decription','Category','Date'])
 
@@ -198,7 +198,7 @@ def export_csv(request):
 @login_required
 def export_excel(request):
     response = HttpResponse(content_type='application/ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=Expenses'+str(datetime.datetime.now())+'.xls'
+    response['Content-Disposition'] = 'attachment; filename=Expenses'+str(datetime.now())+'.xls'
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Expenses')
     row_num = 0
@@ -225,12 +225,12 @@ def export_excel(request):
 @login_required
 def export_pdf(request):
     domain_data = 'http://'+get_current_site(request).domain
-    date = datetime.datetime.now
+    date = datetime.now()
     user = request.user
     expenses = Expense.objects.filter(owner=request.user)
     sum = expenses.aggregate(Sum('amount'))
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = "inline; filename=Expenses"+str(datetime.datetime.now())+".pdf"
+    response['Content-Disposition'] = "inline; filename=Expenses"+str(datetime.now())+".pdf"
     response['Content-Transfer-Encoding'] ='binary'
     context = {
         'expenses':expenses,
