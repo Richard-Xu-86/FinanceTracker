@@ -1,0 +1,75 @@
+{% extends 'base/index.html' %} 
+{% block title %} General Settings | {{site_name}} {%endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    {% include 'base/messages.html' %}
+    <h3>Preferred Currency</h3>
+    <form action="{% url 'preferences' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group">
+            <select name="currency" class="form-select" id="inputGroupSelect04"
+                aria-label="Example select with button addon">
+                {% if user_prefer.currency %}
+                <option name="currency" value="{{user_prefer.currency}}" selected>
+                    {{user_prefer.currency}}
+                </option>
+                {% else %}
+                <option name="currency" selected>Choose...</option>
+                {% endif %} {% for currency in currencies %}
+                <option name="currency" value="{{currency.name}} - {{currency.value}}">
+                    {{currency.name}} - {{currency.value}}
+                </option>
+                {% endfor %}
+            </select>
+            <input class="btn btn-outline-primary" type="submit" value="Save" />
+        </div>
+    </form>
+
+    <hr />
+    <div class="container mt-2">
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-auto">
+                        <h3>All Source</h3>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{% url 'add-source' %}" class="btn btn-primary btn-sm">Add Source</a>
+                    </div>
+                </div>
+                <ul class="list-group">
+                    {% for item in source %}
+                    <li class="list-group-item">
+                        {{item.name}}
+                        <a class="link float-end" href="{% url 'edit-source' item.id %}"><span data-feather="edit"
+                                class="align-text-bottom"></span></a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-md-6">
+                
+        <div class="row">
+            <div class="col-md-auto">
+                <h3>All Category</h3>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'add-category' %}" class="btn btn-primary btn-sm">Add Expenses</a>
+            </div>
+        </div>
+            <ul class="list-group">
+                {% for item in category %}
+                <li class="list-group-item">{{item.name}}
+                    <a class="link float-end" href="{% url 'edit-category' item.id %}"><span data-feather="edit"
+                        class="align-text-bottom"></span></a>
+                </li>
+                {% endfor %}
+            </ul>
+    </div>
+            </div>
+        </div>
+    <hr />
+</div>
+{% endblock %}

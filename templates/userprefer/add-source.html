@@ -1,0 +1,27 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Add Source | {{site_name}}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+<div class="card mt-3">
+    <div class="card-title">
+        <h3 class="text-center">Add Source</h3>
+    </div>
+    <div class="card-body">
+            <form action="{% url 'add-source' %}" method="post">
+            {% csrf_token %}
+            {% include 'base/messages.html' %}
+            <div class="form-group mb-2">
+                <label for="inputsource">New</label>
+                <input type="text" class="form-control form-control-sm" name="source" id="inputsource" value="{{values.source}}">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary btn-primary-sm">
+        </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

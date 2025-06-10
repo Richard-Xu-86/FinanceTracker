@@ -1,0 +1,34 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Edit Source | {{site_name}}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+<div class="card mt-3">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-md-5">
+                <h2>Edit Source</h2>
+            </div>
+            <div class="col-md-2">
+                <a class="btn btn-danger" href="{% url 'delete-source' source.id %}"><span data-feather="trash" class="align-text-center"></span>Delete</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="{% url 'edit-source' source.id %}" method="post">
+            {% csrf_token %}
+            {% include 'base/messages.html' %}
+            <div class="form-group mb-2">
+                <label for="inputsource">Source</label>
+                <input type="text" class="form-control form-control-sm" name="source" id="inputsource" value="{{values.name}}">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary btn-primary-sm">
+        </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

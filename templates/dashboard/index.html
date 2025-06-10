@@ -1,0 +1,108 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+DASHBOARD | {{site_name}}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    {% include 'base/messages.html' %}
+    <h3>DASHBOARD</h3>
+    <hr>
+    <form action="{% url 'dashboard-lastmonth' %}" method="post">
+        {% csrf_token %}
+    <div class="row">
+            <div class="col-md-4">
+                <h5 class="text-decoration-underline fw-bold">Last {{user_month}} Expenses and Income</h5>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col input-group-sm text-center">
+                <label class="text text-primary mt-2">Months</label>&nbsp;
+                <select name="month" class="form-select-sm" id="inputGroupSelect04">
+                    {% for month in months %}
+                    <option {% if user_month == month %} selected {% endif %} name="month" value="{{month}}">
+                        {{month}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col input-group-sm text-center">
+                <label class="text text-primary mt-2">Graph</label>&nbsp;
+                <select name="graph" class="form-select-sm" id="inputGroupSelect04">
+                    {% for graph in graphs %}
+                    <option {% if user_graph == graph %} selected {% endif %} name="graph" value="{{graph}}">
+                        {{graph}}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col auto">
+                <input class="btn btn-outline-primary" type="submit" value="Save" />
+            </div>
+        </form>
+
+        <div class="row mt-2">
+            <div class="col">
+            </div>
+        </div>
+        <div class="col">
+            <div class="card p-1">
+                <div class="card-header p-1">
+                    <h4>Expenses</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart1" width="auto" height="auto"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card p-1">
+                <div class="card-header p-1">
+                    <h4>Incomes</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="myChart2" width="auto" height="auto"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt-3">
+        <a href="{% url 'set-budget' %}" class="btn btn-outline-primary">Set Monthly Budget</a>
+    </div>  
+    <div class="mt-4">
+    {% for item in budget_data %}
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-1">{{ item.category }}</h5>
+                <div class="m-2">
+                    <form method="post" action="{% url 'delete-budget' item.id %}" style="margin-left: auto;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar {% if item.over_budget %}bg-danger{% else %}bg-success{% endif %}"
+                    style="width: {{ item.spent|floatformat:0|divisibleby:item.budget|yesno:'100,100' }}%;">
+                    ${{ item.spent }} / ${{ item.budget }}
+                </div>
+            </div>
+            {% if item.over_budget %}
+                <small class="text-danger">Over budget by ${{ item.over_amount }}</small>
+            {% else %}
+                <small class="text-success">${{ item.remaining }} remaining</small>
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'dashboard/js/main.js' %}"></script>
+{% endblock scripts %}
+
+

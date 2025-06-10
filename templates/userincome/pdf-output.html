@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>PDF Output</title>
+    <meta charset="UTF-8" />
+    <style>
+        @page {
+            size: a4;
+            margin: 0.8cm 1cm 1cm 1cm;
+        }
+        .date{
+            text-align: right;
+        }
+        .img {
+            text-align: center;
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin-bottom: 20px;
+        }
+        table th,
+        table td {
+          text-align: center;
+        }
+        
+        table th {
+          color: #000000;
+          border-bottom: 1px solid #C1CED9;
+          white-space: nowrap;
+        }
+        td{
+            font-size: 4;
+        }
+        table .service,
+        table .desc {
+          text-align: left;
+        }
+        
+        table td {
+        padding-top:5px;
+        padding-bottom:5px;
+           
+        }
+         
+        table tr {
+            border-bottom: 1px solid #C1CED9;
+        }
+         
+        table td.service,
+        table td.desc {
+          vertical-align: top;
+        }
+        
+        table td.unit,
+        table td.qty,
+        table td.total {
+          font-size: 1.2em;
+        }
+        
+        table td.grand {
+          border-top: 1px solid #5D6975;;
+        }
+        h1 {
+           color: #ac4848;
+           font-size: 2.4em;
+           font-weight: bold;
+           text-align: center;
+           margin: 0;
+        }
+        .tot{
+            font-size: 6;
+            font-weight: bold;
+        }
+        h2 {
+            color: #000000;
+            font-size: 7;
+            font-weight: normal;
+            text-decoration: underline;
+        }
+        th{
+            font-size: 6;
+            font-weight:bold;
+        }
+        td{
+            font-size: 5;
+            font-weight: 100;
+        }
+        .hr{
+            color: #ac4848;
+            margin-bottom: 5;
+        }
+        .clearfix:after {
+           content: "";
+           display: table;
+           clear: both;
+        }
+        .head{
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="head">
+        <p>User:{{user}} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{date}} &nbsp; &nbsp; </p>
+        <p></p>
+    </div>
+    <header class="clearfix">
+        <div class="img">
+            <h1>FinanceTracker</h1>
+            <img src="{{domain}}{% static 'icons/icon.jpg' %}" height="80" width="90" />
+        </div>
+        <hr class="hr" >
+    </header>
+    <div class="container">
+        <h2>Income List</h2>
+        <table class="table" style="overflow-x:auto">
+            <thead class="thead">
+                <tr>
+                    <th>No</th>
+                    <th>Amount</th>
+                    <th>Source</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                {% for income in incomes %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{income.amount}}</td>
+                    <td>{{income.source}}</td>
+                    <td>{{income.decription}}</td>
+                    <td>{{income.date}}</td>
+                </tr>
+                {% endfor%}
+                <tr class="total">
+                    <td class="tot">Total</td>
+                    <td class="tot">{{total.amount__sum}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</body>
+
+</html>

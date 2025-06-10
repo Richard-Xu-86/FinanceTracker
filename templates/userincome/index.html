@@ -1,0 +1,141 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Income | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<link href="{% static 'main/css/common.css' %}" rel="stylesheet" />
+{% endblock styles %}
+
+{% block content %}
+<div class="container mt-3">
+    {% include 'base/messages.html' %}
+    <div class="row">
+    <div class="col">
+        <div class="container nvsmain pt-2 pb-1">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Income</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-2 m-1">
+        <a href="{% url 'add-income' %}" class="btn btn-primary">Add Income</a>
+    </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="text" class="form-control" id="searchfield" placeholder="Search">
+            </div>
+        </div>
+        <div class="col-md-5 m-1">
+            <div class="row">
+                <div class="col">
+                    <a target="_blank" href="{% url 'income-export-pdf' %}" class="btn btn-primary btn-sm">Export PDF</a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'income-export-csv' %}" class="btn btn-primary btn-sm">Export CSV</a>
+                </div>
+                <div class="col">
+                    <a href="{% url 'income-export-excel' %}" class="btn btn-primary btn-sm">Export Excel</a>
+                </div>
+    
+
+            </div>
+        </div>
+        <div class="col-auto m-1">
+            <select id="filter-range" class="form-select form-select-sm">
+                <option value="1month" {% if request.GET.range == "1month" %}selected{% endif %}>Last Month</option>
+                <option value="6months" {% if request.GET.range == "6months" %}selected{% endif %}>Last 6 Months</option>
+                <option value="1year" {% if request.GET.range == "1year" %}selected{% endif %}>Last 1 Year</option>
+                <option value="lifetime" {% if request.GET.range == "lifetime" or not request.GET.range %}selected{% endif %}>Lifetime</option>
+            </select>
+        </div>
+    </div>
+        
+    <div class="table-start mt-2">
+        {% if income.count %}
+        <table class="table table-stripped table-hover">
+            <thead>
+                <tr>
+                    <th>Amount ({{currency}})</th>
+                    <th>Source</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for income in page_obj %}
+                <tr>
+                    <td>{{income.amount}}</td>
+                    <td>{{income.source}}</td>
+                    <td>{{income.decription}}</td>
+                    <td>{{income.date}}</td>
+                    <td><a class="link" href="{% url 'income-edit' income.id %}"><span data-feather="edit" class="align-text-bottom"></span></a></td>
+                </tr>
+                {% endfor %}
+                <tr class="table-primary">
+                    <td>TOTAL : </td>
+                    <td>{{sum}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+    <p class="no-results" style="display: none;">No results </p>
+    <div class="table-search">
+        <table class="table table-stripped table-hover">
+            <thead>
+                <tr>
+                    <th>Amount ({{currency}})</th>
+                    <th>Source</th>
+                    <th>Decreption</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="t-body">
+
+            </tbody>
+        </table>
+    </div>
+
+        <div class="pagenation-container row p-1">
+        <div class="col">
+            Showing page <b><a class="text-decoration-none">{{page_obj.number}}</a></b>  of <b><a class="text-decoration-none">{{page_obj.paginator.num_pages}}</a></b>
+        </div>
+        <div class="col">
+        <ul class="pagination align-right float-end mr-auto">
+            {% if page_obj.has_previous %}
+            <li {% if page_obj.number == 1 %} class="page-item active" {% endif %}><a class="page-link" href="?page=1">&laquo; 1</a></li>
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+      
+            {% if page_obj.has_next %}
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+            <li class="page-item"> <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages}} &raquo;</a></li>
+            {% endif %}  
+        </ul>
+        </div>
+        </div>
+</div>
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'userincome/js/income.js' %}"></script>
+<script>
+    document.getElementById("filter-range").addEventListener("change", function () {
+        const selected = this.value;
+        const url = new URL(window.location.href);
+        url.searchParams.set('range', selected);
+        window.location.href = url.toString();
+    });
+</script>
+{% endblock scripts %}

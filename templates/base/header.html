@@ -1,0 +1,19 @@
+<header class="navbar navbar-dark bg-light flex-md-nowrap p-0 shadow fixed-top">
+    <a class="navbar-brand bg-primary col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">{{site_name}}</a>
+    <button class="navbar-toggler border bg-dark d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="col mx-auto"></div>
+    <button id="theme-toggle" class="btn btn-sm btn-outline-dark me-3 bg-white" title="Toggle Dark Mode">
+            <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+    <div class="navbar-nav bg-white mx-3">
+        <div class="nav-item text-nowrap">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <input class="nav-link text-primary px-3" type="submit" value="Sign out">
+            </form>
+        </div>
+    </div>
+</header>

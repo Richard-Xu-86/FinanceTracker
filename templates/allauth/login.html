@@ -1,0 +1,57 @@
+{% extends 'allauth/base.html' %} 
+{% load static %} 
+{% block title %} Login | {{site_name}} {% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <div class="row mt-4">
+    <h1 class="text-center">Welcome to <span class="title-h">{{site_name}}</span>!</h1>
+  </div>
+<div class="row d-flex justify-content-center mt-3">
+  <div class="col-md-7 col-sm-10">
+    <div class="card">
+      <div class="card-title">
+        <h3 class="text-center">Login</h3>
+      </div>
+      <div class="card-body">
+        <form action="{% url 'login' %}" method="post">
+          {% csrf_token %}
+          {% include 'base/messages.html' %}
+          <div class="row mt-2">
+            <label class="col-sm-3 col-form-label" for="inputusername">Username <span class="text-danger">*</span></label>
+            <div class="col-sm-9">
+              <input required type="text" name="username" placeholder="John...." class="form-control" id="inputusername"
+              value="{{ FieldValues.username }}" />
+            </div>
+          </div>
+
+          <div class="row mt-2">
+            <label class="col-sm-3 col-form-label" for="inputpassword">Password <span class="text-danger">*</span> 
+              <span class="nvs-tooltip" href="#" data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-custom-class="custom-tooltip" data-bs-title="<strong>★</strong> Password must contain atleast 8 characters." data-bs-html="true">
+                  <span class="badge rounded-pill text-bg-warning">i</span>
+              </span>
+            </label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input name="password" id="inputpassword" type="password" class="form-control" placeholder="Password" required>
+                <span class="input-group-text">
+                  <i toggle="#inputpassword" class="fa fa-fw toggle-password fa-eye"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <input type="submit" value="Login" class="btn btn-primary submit-btn w-100 mt-3"/>
+        </form>
+        <div class="text-center mt-2">
+          <span class="text-lead">Don't have an account? </span><a href="{% url 'register' %}" > Register</a><br >
+          <span class="text-lead">Forget password? </span><a href="{% url 'reset-password' %}" > Reset it</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Add Category | {{site_name}}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+<div class="card mt-3">
+    <div class="card-title">
+        <h2 class="text-center">Add category</h2>
+    </div>
+    <div class="card-body">
+            <form action="{% url 'add-category' %}" method="post">
+            {% csrf_token %}
+            {% include 'base/messages.html' %}
+            <div class="form-group mb-2">
+                <label for="inputcategory">New</label>
+                <input type="text" class="form-control form-control-sm" name="category" id="inputcategory" value="{{values.category}}">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary btn-primary-sm">
+        </form>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

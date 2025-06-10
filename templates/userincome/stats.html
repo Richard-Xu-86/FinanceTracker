@@ -1,0 +1,55 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Income Summary | {{site_name}}
+{% endblock %}
+
+{% block styles %}
+<link href="{% static 'main/css/common.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    {% include 'base/messages.html' %}
+    <div class="row">
+    <div class="col">
+        <div class="container nvsmain pt-2 pb-1">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Income Summary</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Summary</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-2 m-1">
+        <a href="{% url 'income' %}" class="btn btn-primary">Back</a>
+    </div>
+    </div>
+    <div class="row align-items-start mt-4">
+    <!-- Dropdown -->
+    <div class="col-md-3">
+        <label for="graph" class="form-label">Choose a graph:</label>
+        <select name="graph" id="graph" class="form-select">
+            <option value="bar">Bar</option>
+            <option value="pie">Pie</option>
+            <option value="line">Line</option>
+            <option value="doughnut">Doughnut</option>
+            <option value="polarArea">Polar Area</option>
+        </select>
+    </div>
+
+    <!-- Chart -->
+    <div class="col-md-9">
+        <div style="max-height: 350px;">
+            <canvas id="myChart" width="auto" height="auto"></canvas>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'userincome/js/stats.js' %}"></script>
+{% endblock %}

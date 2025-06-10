@@ -1,0 +1,53 @@
+{% extends 'base/index.html' %}
+{% load static %}
+{% block title %}
+Add Income | {{site_name}}
+{% endblock title %}
+
+{% block styles %}
+<link href="{% static 'main/css/common.css' %}" rel="stylesheet" />
+{% endblock styles %}
+
+{% block content %}
+<div class="container mt-3">
+<div class="container nvsmain pt-2 pb-1">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'income' %}">Income</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Income</li>
+        </ol>
+    </nav>
+</div>
+<div class="card mt-3">
+    <div class="card-body pt-2">
+            <form action="{% url 'add-income' %}" method="post">
+            {% csrf_token %}
+            {% include 'base/messages.html' %}
+            <div class="form-group mb-2">
+                <label for="inputamount">Amount</label>
+                <input type="number" class="form-control form-control-sm" name="amount" id="inputamount" value="{{values.amount}}">
+            </div>
+            <div class="form-group mb-2">
+                <label for="inputdecription">Decription</label>
+                <input type="text" class="form-control form-control-sm" name="decription" id="inputdecription" value="{{values.decription}}">
+            </div>
+            <div class="form-group mb-2">
+                <label for="inputselect">Sources</label>
+                <select class="form-control form-control-sm" name="source" id="inputselect">
+                    <option selected name="source">Choose...</option>
+                    {% for source in sources %}
+                    <option name="source" value="{{source.name}}">{{source.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group mb-2">
+                <label for="inputdate">Date of Income</label>
+                <input type="date" class="form-control form-control-sm" name="income_date" id="inputdate" value="{{values.income_date}}">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary btn-primary-sm">
+        </form>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

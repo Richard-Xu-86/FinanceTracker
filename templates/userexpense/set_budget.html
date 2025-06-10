@@ -1,0 +1,13 @@
+<form method="POST">
+    {% csrf_token %}
+    <label>Category:</label>
+    <input type="text" name="category" class="form-control" required>
+
+    <label>Amount:</label>
+    <input type="number" name="amount" class="form-control" required>
+
+    <label>Month:</label>
+    <input type="month" name="month" class="form-control" required>
+
+    <button class="btn btn-primary mt-2">Set Budget</button>
+</form>
