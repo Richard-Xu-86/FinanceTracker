@@ -3,6 +3,8 @@ from django.contrib import messages
 from dotenv import load_dotenv #Loads environment variables from a .env file
 load_dotenv()
 import os #Lets you access environment variables and file system paths
+import dj_database_url
+
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent #defines the rootfolder, manage.py
@@ -71,15 +73,18 @@ WSGI_APPLICATION = 'FinanceTracker.wsgi.application' #build bridge between djang
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER' : os.environ.get('DB_USER'),
-        'PASSWORD' : os.environ.get('DB_USER_PASSWORD'),
-        'HOST' : os.environ.get('DB_HOST'),
-        'PORT' : os.environ.get('DB_PORT'),
-    }
+    'default': dj_database_url.config(conn_max_age=600)
 }
+#DATABASES = {
+   # 'default': {
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME': os.environ.get('DB_NAME'),
+        #'USER' : os.environ.get('DB_USER'),
+        #'PASSWORD' : os.environ.get('DB_USER_PASSWORD'),
+        #'HOST' : os.environ.get('DB_HOST'),
+        #'PORT' : os.environ.get('DB_PORT'),
+   # }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
