@@ -1,0 +1,8 @@
+.nvsmain{
+    background-color: rgb(231, 231, 231);
+}
+@page {
+    size: a4;
+    margin: 0.8cm 1cm 1cm 1cm;
+}
+

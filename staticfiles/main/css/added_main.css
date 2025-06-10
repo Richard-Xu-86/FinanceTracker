@@ -1,0 +1,13 @@
+.btn,.form-check-input,.form-select,.input-group-text, .form-control{
+	border-radius: 2px !important;
+}
+.title-h{
+    text-transform: capitalize;
+    color: #000;
+    text-decoration: underline rgb(38, 143, 64);
+    text-shadow: .2rem .2rem .1rem rgba(0, 0, 0, .3);
+}
+.custom-tooltip {
+    --bs-tooltip-bg: rgb(19, 94, 37);
+    --bs-tooltip-color: #fff;
+}
