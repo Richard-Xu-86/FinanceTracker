@@ -1,16 +1,15 @@
 import os
 import django
+from django.core.management import call_command
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FinanceTracker.settings")
 django.setup()
 
-from django.core.management import call_command
-
-# Only run migrations the first time
 try:
-    call_command('migrate', interactive=False)
+    call_command("migrate", interactive=False)
+    call_command("collectstatic", "--noinput")
 except Exception as e:
-    print("Migration failed:", e)
+    print("Setup failed:", e)
 
-# Now run the actual server
+# Start the app using gunicorn
 os.system("gunicorn FinanceTracker.wsgi:application")
