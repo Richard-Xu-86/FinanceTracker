@@ -1,71 +1,106 @@
-# Income-Expenses-django
-## ExpenseEase a Finance Tracker
-
-## Overview
-### PROJECT LINK : https://nvs-in-out.onrender.com/
-### Github : https://github.com/Venkatnvs/Income-Expenses-django
-### VideoLink : https://youtu.be/EHVT0bA7EfE
-A Django Website to manage Income and Expenses and summery using chart.js and export as pdf, excel,cs
-
 ## Purpose
-A simple, user-friendly web application that allows users to track their
-personal finances, including income, expenses, and the ability to generate basic
-reports.
+A streamlined and intuitive web application designed to help users manage their personal finances by tracking income and expenses, visualizing spending patterns, and generating insightful financial summaries. 
 
-## Features
+# Features
 
-### 1. User-Friendly Dashboard
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/b6340761-57e8-4570-98c1-c0d33bbef33b)
+## 1. User-Friendly Dashboard
+- Displays real-time expense and income data with interactive bar graphs.
+- Offers graph type and date range customization.
+- Highlights spending trends and over-budget warnings.
+- Includes dark mode and light mode toggle for accessibility.
+- Set monthly budgets per category.
+- View budget progress bars with green for under budget and red for over budget.
+- Display real-time spending vs. budget.
+- Easily delete budget entries.
+![image](https://github.com/user-attachments/assets/b3e28a18-9169-429e-a824-71145f6d0221)
+![image](https://github.com/user-attachments/assets/49311ca3-d666-4dfd-a400-4dd67bd3c194)
+
 
 ### 2. Login/Sign-Up
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/0c48751a-b0b0-460d-8baf-994796cc9293)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/4876cbf1-6689-4003-a95b-21d5c1b3b937)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/878901ae-ea93-49b2-9b24-316818bcacab)
+- Simple and clean login and registration interfaces using Django authentication.
+- Custom error messages for invalid login attempts or incorrect credentials.
+- Password reset support via email (Django-compatible if email backend is configured).
+- Set/Reset Password page to define a new password securely.
+- Built-in session management — users stay logged in across pages and can securely log out.
+![image](https://github.com/user-attachments/assets/832015c0-c67d-41f4-bb73-0e345f0213f9)
 
-### 3. Expenses Page
-- With Search and Export Features
-- Add, Edit and Delete Expenses
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/a49bbf15-ad68-4c4c-a35a-39e4ee33e27c)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/cc281f71-30ed-4363-a051-eeae5f385646)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/abe15037-5aff-4350-bc0d-63a524810bf7)
+## 3. Expenses Page
+- View a table of recorded expenses with clear columns for amount, category, description, and date.
+- Search expenses using keywords.
+- Filter by 1 month, 6 months, 1 year, or lifetime
+- Inline edit and delete functionality for each record.
+![image](https://github.com/user-attachments/assets/90fc0007-c95b-4ea1-bd91-d2c818168982)
 
-### 4. Income Page
-- With Search and Export Features
-- Add, Edit and Delete Expenses
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/ba2f27ce-a6bc-40e7-bc71-0b48dd05ae2c)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/05aa5523-743d-49fb-90eb-7fc7d30ee74e)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/1545cca2-bdc1-4a25-818b-3c2d5439dfd8)
 
-### 5. Summary
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/88f5e267-65da-4816-ace6-29b6f1362509)
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/5a016288-e9a0-419a-8900-170a39173f15)
+## 4. Income Page
+- View a table of recorded incomes with clear columns for amount, category, description, and date.
+- Search incomes using keywords.
+- Filter by 1 month, 6 months, 1 year, or lifetime
+- Inline edit and delete functionality for each record.
+![image](https://github.com/user-attachments/assets/12025405-2f56-46c7-87b1-4e45989e7812)
+
+## 5. Summary
+- Visualize spending by category across selectable time ranges.
+- Choose different graph types: Bar, Pie, Line, etc.
+- Dynamically fetches and plots category-wise totals.
+- Responsive and animated for better UX.
+![image](https://github.com/user-attachments/assets/83c3159c-bf32-44e8-ba6d-e3e5883ad887)
+![image](https://github.com/user-attachments/assets/5aa0a570-78a2-4f8c-ba22-b677315bc093)
 
 ### 6. Export
 - PDF
+  ![image](https://github.com/user-attachments/assets/2cd51d2e-9e9c-4c11-b6d2-0e375fc3cb2b)
   
-  ![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/36f9d819-ff7e-4d73-8c9b-0f132f8f9a93)
 - Excel
-  
-  ![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/8760576a-4b89-44f3-a2f1-0461fc8e9d31)
+  ![image](https://github.com/user-attachments/assets/7b11c500-5072-4157-bd4b-8f705eac8392)
 
-### 7. General Settings
-![image](https://github.com/Venkatnvs/Income-Expenses-django/assets/97899253/52bfa752-c463-4e77-aac5-906734d51c8f)
+- CSV
+  ![image](https://github.com/user-attachments/assets/3d829122-0581-45e6-b860-a1bf7076169f)
+
+ 
+## 7. General Settings
+- Set preferred currency (e.g., CAD).
+- Add custom income sources and expense categories.
+- Instantly reflects changes throughout the app.
+- Edit or remove sources/categories as needed.
+![image](https://github.com/user-attachments/assets/6100024b-8c19-4112-ad9f-5831ec5f2f03)
+
 
 
 ## Installation
-Follow these steps to set up ExpenseEase locally:
+Follow these steps to set up FinanceTracker locally:
 
 ```bash
 
-git clone https://github.com/Venkatnvs/Income-Expenses-django.git
-cd Income-Expenses-django
+# 1. Clone the repository
+git clone https://github.com/Richard-Xu-86/FinanceTracker.git
+cd FinanceTracker
+
+# 2. (Optional but recommended) Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+
+# 3. Install required packages
 pip install -r requirements.txt
+
+# 4. Set up the database
 python manage.py makemigrations
 python manage.py migrate
+
+# 5. Start the development server
 python manage.py runserver
 
-```
-Note: If it is showing error edit ENTER_SECRET_KEY, ENTER_PASSWORD, ENTER_EMAIL, ENTER_HOST_USERNAME in env.txt from main directory and paste as .env in Income-Expenses-django/ path
+```If you encounter environment variable errors (e.g. related to SECRET_KEY, EMAIL_HOST_USER, etc.), make sure to:
+
+Rename or copy env.txt to .env
+Open .env and fill in the following variables with your values:
+
+SECRET_KEY=your_django_secret_key
+EMAIL_HOST_USER=your_email@example.com
+EMAIL_HOST_PASSWORD=your_app_password
+DEBUG=True
+
+Make sure this .env file is located at the root of the project (FinanceTracker/) and is listed in .gitignore.
 
 ## For any query feel free to contact 
-venkatnvs2005@gmail.com
+richardxubusiness@gmail.com
