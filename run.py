@@ -1,12 +1,16 @@
-from django.core.mail import send_mail
-from django.conf import settings
+import os
+import django
 
-send_mail(
-    subject='Test Email',
-    message='This is a test.',
-    from_email=settings.EMAIL_FROM_EMAIL,
-    recipient_list=['epicmmmoss@gmail.com'],
-    fail_silently=False,
-)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "FinanceTracker.settings")
+django.setup()
 
-print("EMAIL_HOST is:", settings.EMAIL_HOST)
+from django.core.management import call_command
+
+# Only run migrations the first time
+try:
+    call_command('migrate', interactive=False)
+except Exception as e:
+    print("Migration failed:", e)
+
+# Now run the actual server
+os.system("gunicorn FinanceTracker.wsgi:application")
